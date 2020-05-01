@@ -23,7 +23,7 @@ function styled(tag) {
         return function Styled(props, ref) {
             // Grab a shallow copy of the props
             // _ctx.p: is the props sent to the context
-            const _props = (_ctx.p = Object.assign(props));
+            const _props = (_ctx.p = Object.assign({}, props));
             const _previousClassName = _props.className;
 
             // Set a flag if the current components had a previous className
