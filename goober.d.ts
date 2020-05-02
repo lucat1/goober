@@ -11,15 +11,31 @@ declare namespace goober {
             JSX.LibraryManagedAttributes<T, JSX.IntrinsicElements[T]> & P
         >;
 
+        <T extends keyof JSX.IntrinsicElements, P extends Object = {}>(tag: T, fwd: any): Tagged<
+            JSX.LibraryManagedAttributes<T, JSX.IntrinsicElements[T]> & P & { ref: any }
+        >;
+
         // used to extend other styled components. Inherits props from the extended component
         <PP extends Object = {}, P extends Object = {}>(tag: StyledVNode<PP>): Tagged<PP & P>;
+
+        <PP extends Object = {}, P extends Object = {}>(tag: StyledVNode<PP>, fwd: any): Tagged<
+            PP & P & { ref: any }
+        >;
 
         // used when creating a component from a string (html native) but using a non HTML standard
         // component, such as when you want to style web components
         <P extends Object = {}>(tag: string): Tagged<P & Partial<JSX.ElementChildrenAttribute>>;
 
+        <P extends Object = {}>(tag: string, fwd: any): Tagged<
+            P & Partial<JSX.ElementChildrenAttribute> & { ref: any }
+        >;
+
         // used to create a styled component from a JSX element (both functional and class-based)
         <T extends JSX.Element | JSX.ElementClass, P extends Object = {}>(tag: T): Tagged<P>;
+
+        <T extends JSX.Element | JSX.ElementClass, P extends Object = {}>(tag: T, ref: any): Tagged<
+            P & { ref: any }
+        >;
     }
 
     const styled: StyledFunction;
