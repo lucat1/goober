@@ -33,6 +33,10 @@ function styled(tag, fwd) {
             _props.className =
                 css.apply(_ctx, _args) + (_previousClassName ? ' ' + _previousClassName : '');
 
+            if (fwd && ref) {
+                _props.ref = ref;
+            }
+
             return h(tag, _props);
         }
 
