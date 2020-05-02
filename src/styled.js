@@ -14,13 +14,12 @@ const setup = (pragma, prefix) => {
  * Styled function
  * @param {String} tag
  */
-function styled(tag) {
+function styled(tag, fwd) {
     const _ctx = this || {};
 
     return function wrapper() {
         const _args = arguments;
-
-        return function Styled(props, ref) {
+        function Styled(props, ref) {
             // Grab a shallow copy of the props
             // _ctx.p: is the props sent to the context
             const _props = (_ctx.p = Object.assign({}, props));
@@ -35,7 +34,9 @@ function styled(tag) {
                 css.apply(_ctx, _args) + (_previousClassName ? ' ' + _previousClassName : '');
 
             return h(tag, _props);
-        };
+        }
+
+        return fwd ? fwd(Styled) : Styled;
     };
 }
 
