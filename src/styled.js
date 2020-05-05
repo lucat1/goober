@@ -41,7 +41,8 @@ function styled(tag, fwd) {
         }
 
         if (process.env.NODE_ENV === 'development') {
-            Styled._t = tag._t || tag.displayName || tag;
+            Styled._t =
+                tag._t || tag.displayName || typeof tag === 'string' ? tag : tag.name || '?';
             Styled.displayName = 'Styled(' + Styled._t + ')';
         }
 
