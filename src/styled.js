@@ -40,6 +40,11 @@ function styled(tag, fwd) {
             return h(tag, _props);
         }
 
+        if (process.env.NODE_ENV === 'development') {
+            Styled._t = tag._t || tag.displayName || tag;
+            Styled.displayName = 'Styled(' + Styled._t + ')';
+        }
+
         return fwd ? fwd(Styled) : Styled;
     };
 }
